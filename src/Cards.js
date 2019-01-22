@@ -18,14 +18,17 @@ class SwipeCards extends Component {
 		this.assignRef = this.assignRef.bind(this)
 	}
 	removeCard(side, cardId) {
+		const {children, onEnd} = this.props
+		if (children.length === (this.state.index + 1) && onEnd) onEnd()
+
+		this.setState({
+			index: this.state.index + 1,
+		})
+
 		if (!this.props.disableAlerts) {
-			const {children, onEnd} = this.props
 			setTimeout(() => this.setState({[`alert${side}`]: false}), 300)
 
-			if (children.length === (this.state.index + 1) && onEnd) onEnd()
-
 			this.setState({
-				index: this.state.index + 1,
 				[`alert${side}`]: true
 			})
 		}
@@ -54,7 +57,7 @@ class SwipeCards extends Component {
 
 	render() {
 		const {index, containerSize} = this.state
-		const {children, className, onSwipeTop, onSwipeBottom} = this.props
+		const {children, className, onSwipeTop, onSwipeBottom, singleCard} = this.props
 		if (!containerSize.x || !containerSize.y) return <div ref={this.assignRef} className={className} />
 
 		const _cards = React.Children.toArray(children).reduce((memo, c, i) => {

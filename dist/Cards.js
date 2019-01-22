@@ -57,20 +57,22 @@ var SwipeCards = function (_Component) {
 		value: function removeCard(side, cardId) {
 			var _this2 = this;
 
-			if (!this.props.disableAlerts) {
-				var _props = this.props,
-				    children = _props.children,
-				    onEnd = _props.onEnd;
+			var _props = this.props,
+			    children = _props.children,
+			    onEnd = _props.onEnd;
 
+			if (children.length === this.state.index + 1 && onEnd) onEnd();
+
+			this.setState({
+				index: this.state.index + 1
+			});
+
+			if (!this.props.disableAlerts) {
 				setTimeout(function () {
 					return _this2.setState(_defineProperty({}, 'alert' + side, false));
 				}, 300);
 
-				if (children.length === this.state.index + 1 && onEnd) onEnd();
-
-				this.setState(_defineProperty({
-					index: this.state.index + 1
-				}, 'alert' + side, true));
+				this.setState(_defineProperty({}, 'alert' + side, true));
 			}
 		}
 	}, {
@@ -111,7 +113,8 @@ var SwipeCards = function (_Component) {
 			    children = _props2.children,
 			    className = _props2.className,
 			    onSwipeTop = _props2.onSwipeTop,
-			    onSwipeBottom = _props2.onSwipeBottom;
+			    onSwipeBottom = _props2.onSwipeBottom,
+			    singleCard = _props2.singleCard;
 
 			if (!containerSize.x || !containerSize.y) return _react2.default.createElement('div', { ref: this.assignRef, className: className });
 

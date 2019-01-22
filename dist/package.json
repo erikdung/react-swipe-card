@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/alexandre-garrec/react-swipe-card.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
