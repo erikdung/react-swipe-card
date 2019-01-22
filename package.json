@@ -14,7 +14,7 @@
     "copy:package": "cp -R package.json dist/",
     "copy:readme": "cp -R README.md dist/",
     "npm:publish": "npm run build && npm run release && npm run copy:readme && npm run copy:package && cd dist && npm publish && cd .. && npm run deploy-storybook",
-    "npm:publish-local": "npm run build && npm run release && npm run copy:readme && npm run copy:package && cd dist",
+    "npm:publish-local": "npm run build && npm run copy:readme && npm run copy:package && cd dist",
     "release": "npm run changelog && npm run rilize -- --non-interactive",
     "rilize": "$(npm bin)/release-it --github.releaseName=\"%s (`$(npm bin)/superheroes`)\"",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
