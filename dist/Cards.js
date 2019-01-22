@@ -59,13 +59,16 @@ var SwipeCards = function (_Component) {
 
 			var _props = this.props,
 			    children = _props.children,
-			    onEnd = _props.onEnd;
+			    onEnd = _props.onEnd,
+			    singleCard = _props.singleCard;
 
 			if (children.length === this.state.index + 1 && onEnd) onEnd();
 
-			this.setState({
-				index: this.state.index + 1
-			});
+			if (!singleCard) {
+				this.setState({
+					index: this.state.index + 1
+				});
+			}
 
 			if (!this.props.disableAlerts) {
 				setTimeout(function () {

@@ -18,12 +18,14 @@ class SwipeCards extends Component {
 		this.assignRef = this.assignRef.bind(this)
 	}
 	removeCard(side, cardId) {
-		const {children, onEnd} = this.props
+		const {children, onEnd, singleCard} = this.props
 		if (children.length === (this.state.index + 1) && onEnd) onEnd()
 
-		this.setState({
-			index: this.state.index + 1,
-		})
+		if (!singleCard) {
+			this.setState({
+				index: this.state.index + 1,
+			})
+		}
 
 		if (!this.props.disableAlerts) {
 			setTimeout(() => this.setState({[`alert${side}`]: false}), 300)
